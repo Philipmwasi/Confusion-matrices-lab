@@ -78,13 +78,30 @@ To gain a better understanding of confusion matrices, complete the `conf_matrix(
 
 ```python
 def conf_matrix(y_true, y_pred):
-    pass
-
-
+    # Initialize counts
+    TP = 0
+    TN = 0
+    FP = 0
+    FN = 0
+    
+    # Calculate counts
+    for true, pred in zip(y_true, y_pred):
+        if true == 1 and pred == 1:
+            TP += 1
+        elif true == 0 and pred == 0:
+            TN += 1
+        elif true == 0 and pred == 1:
+            FP += 1
+        elif true == 1 and pred == 0:
+            FN += 1
+    
+    # Return confusion matrix
+    return {'TP': TP, 'TN': TN, 'FP': FP, 'FN': FN}
 
 # Test the function
 conf_matrix(y_test, y_hat_test)
 # Expected output: {'TP': 38, 'TN': 26, 'FP': 7, 'FN': 5}
+
 ```
 
 ## Check your work with `sklearn`
